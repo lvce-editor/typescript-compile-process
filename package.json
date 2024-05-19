@@ -101,5 +101,9 @@
     "rollup": "^4.17.2",
     "ts-jest": "^29.1.2",
     "typescript": "^5.4.5"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   }
 }
