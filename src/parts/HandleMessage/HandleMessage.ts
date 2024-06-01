@@ -1,4 +1,3 @@
-import * as Callback from '../Callback/Callback.ts'
 import * as Command from '../Command/Command.ts'
 import * as JsonRpc from '../JsonRpc/JsonRpc.ts'
 
@@ -19,7 +18,7 @@ export const handleMessage = (event) => {
     event.target,
     event.data,
     Command.execute,
-    Callback.resolve,
+    JsonRpc.resolve,
     prepare,
     logError,
     requiresSocket,
