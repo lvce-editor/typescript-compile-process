@@ -2,7 +2,7 @@
   "name": "@lvce-editor/typescript-compile-process",
   "version": "0.0.0-dev",
   "description": "TypeScript Compile Process",
-  "main": "index.js",
+  "main": "src/typescriptCompileProcessMain.ts",
   "bin": "bin/typescriptCompileProcess.js",
   "type": "module",
   "scripts": {
