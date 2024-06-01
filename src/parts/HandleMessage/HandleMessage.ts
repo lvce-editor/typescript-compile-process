@@ -1,6 +1,6 @@
 import * as Callback from '../Callback/Callback.ts'
 import * as Command from '../Command/Command.ts'
-import * as JsonRpc from '../JsonRpc/JsonRpc.js'
+import * as JsonRpc from '../JsonRpc/JsonRpc.ts'
 
 const prepare = (error) => {
   return error
