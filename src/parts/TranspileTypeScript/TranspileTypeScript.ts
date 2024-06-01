@@ -1,6 +1,6 @@
 import { VError } from '@lvce-editor/verror'
-import * as Assert from '../Assert/Assert.js'
-import * as LoadTypeScript from '../LoadTypeScript/LoadTypeScript.js'
+import * as Assert from '../Assert/Assert.ts'
+import * as LoadTypeScript from '../LoadTypeScript/LoadTypeScript.ts'
 import * as TypeScriptPath from '../TypeScriptPath/TypeScriptPath.js'
 
 export const transpileTypeScript = async (code) => {
