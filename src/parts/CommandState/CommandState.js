@@ -1,7 +1,9 @@
-const commands = Object.create(null)
+export const state = {
+  commands: Object.create(null),
+}
 
 export const registerCommand = (key, fn) => {
-  commands[key] = fn
+  state.commands[key] = fn
 }
 
 export const registerCommands = (commandMap) => {
@@ -11,5 +13,5 @@ export const registerCommands = (commandMap) => {
 }
 
 export const getCommand = (key) => {
-  return commands[key]
+  return state.commands[key]
 }
