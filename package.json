@@ -3,6 +3,7 @@
   "version": "0.0.0-dev",
   "description": "TypeScript Compile Process",
   "main": "index.js",
+  "bin": "bin/typescriptCompileProcess.js",
   "type": "module",
   "scripts": {
     "test": "node --unhandled-rejections=warn --experimental-vm-modules ./node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
