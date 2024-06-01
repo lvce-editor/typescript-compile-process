@@ -72,13 +72,25 @@ delete packageJson.prettier
 delete packageJson.jest
 packageJson.version = version
 packageJson.main = 'dist/index.js'
-// packageJson.types = 'dist/index.d.ts'
 
 await writeJson(join(dist, 'package.json'), packageJson)
 
-// await cp(join(root, 'src', 'index.d.ts'), join(dist, 'dist', 'index.d.ts'), {
-//   recursive: true,
-// })
+await cp(join(root, 'bin'), join(root, 'dist', 'bin'), {
+  recursive: true,
+})
+
+const binContent = await readFile(
+  join(root, 'dist', 'bin', 'typescriptCompileProcess.js'),
+  'utf8',
+)
+const newBinContent = binContent.replace(
+  '../src/typescriptCompileProcessMain.js',
+  '../dist/index.js',
+)
+await writeFile(
+  join(root, 'dist', 'bin', 'typescriptCompileProcess.js'),
+  newBinContent,
+)
 
 await cp(join(root, 'README.md'), join(dist, 'README.md'))
 await cp(join(root, 'LICENSE'), join(dist, 'LICENSE'))
