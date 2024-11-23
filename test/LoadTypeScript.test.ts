@@ -43,3 +43,21 @@ test('loadTypeScript - error', async () => {
     new Error('Failed to load typescript: TypeError: x is not a function'),
   )
 })
+
+test('loadTypeScript - error - not found', async () => {
+  class ModuleNotFoundError extends Error {
+    code: string
+    constructor() {
+      super('module not found')
+      this.code = 'ERR_MODULE_NOT_FOUND'
+    }
+  }
+  // @ts-ignore
+  jest.spyOn(ImportScript, 'importScript').mockImplementation(() => {
+    throw new ModuleNotFoundError()
+  })
+  const typescriptPath = '/test/typscript.js'
+  await expect(LoadTypeScript.loadTypeScript(typescriptPath)).rejects.toThrow(
+    new Error('Failed to load typescript: Typescript not found'),
+  )
+})
