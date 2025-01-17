@@ -1,6 +1,6 @@
 import { VError } from '@lvce-editor/verror'
-import * as TranspileTypeScript from '../TranspileTypeScript/TranspileTypeScript.ts'
 import { readFile, writeFile } from 'node:fs/promises'
+import * as TranspileTypeScript from '../TranspileTypeScript/TranspileTypeScript.ts'
 
 export const transpileTypeScriptAtPath = async (inPath: string, outPath: string): Promise<void> => {
   try {
