@@ -2,33 +2,24 @@
   "name": "@lvce-editor/typescript-compile-process",
   "version": "0.0.0-dev",
   "description": "TypeScript Compile Process",
-  "main": "src/typescriptCompileProcessMain.ts",
-  "bin": "bin/typescriptCompileProcess.js",
-  "type": "module",
-  "scripts": {
-    "test": "node --unhandled-rejections=warn --experimental-vm-modules ./node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
-    "test:watch": "node --unhandled-rejections=warn --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch",
-    "type-check": "tsc",
-    "lint": "eslint .",
-    "format": "prettier --write ."
-  },
   "keywords": [
     "Lvce Editor"
   ],
-  "author": "Lvce Editor",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/lvce-editor/typescript-compile-process.git"
   },
-  "engines": {
-    "node": ">=18"
-  },
-  "dependencies": {
-    "@lvce-editor/assert": "^1.3.0",
-    "@lvce-editor/command": "^1.2.0",
-    "@lvce-editor/rpc": "^2.2.0",
-    "@lvce-editor/verror": "^1.6.0"
+  "license": "MIT",
+  "author": "Lvce Editor",
+  "type": "module",
+  "main": "src/typescriptCompileProcessMain.ts",
+  "bin": "bin/typescriptCompileProcess.js",
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "test": "node --unhandled-rejections=warn --experimental-vm-modules ./node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
+    "test:watch": "node --unhandled-rejections=warn --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch",
+    "type-check": "tsc"
   },
   "xo": {
     "rules": {
@@ -75,6 +66,11 @@
       "distmin"
     ]
   },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 120
+  },
   "jest": {
     "injectGlobals": false,
     "extensionsToTreatAsEsm": [
@@ -100,6 +96,12 @@
       }
     }
   },
+  "dependencies": {
+    "@lvce-editor/assert": "^1.3.0",
+    "@lvce-editor/command": "^1.2.0",
+    "@lvce-editor/rpc": "^2.2.0",
+    "@lvce-editor/verror": "^1.6.0"
+  },
   "devDependencies": {
     "@babel/preset-typescript": "^7.27.1",
     "@jest/globals": "^29.7.0",
@@ -114,9 +116,7 @@
     "ts-jest": "^29.3.2",
     "typescript": "^5.8.3"
   },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "printWidth": 120
+  "engines": {
+    "node": ">=18"
   }
 }
