@@ -4,7 +4,7 @@ import * as TranspileTypeScript from '../TranspileTypeScript/TranspileTypeScript
 
 export const transpileTypeScriptAtPath = async (inPath: string, outPath: string): Promise<void> => {
   try {
-    const content = await readFile(inPath, 'utf-8')
+    const content = await readFile(inPath, 'utf8')
     const newContent = await TranspileTypeScript.transpileTypeScript(content)
     await writeFile(outPath, newContent)
   } catch (error) {
