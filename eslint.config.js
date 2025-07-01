@@ -10,6 +10,7 @@ export default [
     rules: {
       'n/no-unsupported-features/node-builtins': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
+      'jest/no-restricted-jest-methods': 'off',
     },
   },
 ]
