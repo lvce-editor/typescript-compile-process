@@ -22,7 +22,6 @@ test('loadTypeScript', async () => {
 })
 
 test('loadTypeScript - error - missing default export', async () => {
-  const typescript = {}
   // @ts-ignore
   jest.spyOn(ImportScript, 'importScript').mockImplementation(() => {
     return {}
