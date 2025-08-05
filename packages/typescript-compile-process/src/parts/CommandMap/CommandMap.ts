@@ -1,6 +1,6 @@
 import * as HandleElectronMessagePort from '../HandleElectronMessagePort/HandleElectronMessagePort.ts'
-import * as TranspileTypeScript from '../TranspileTypeScript/TranspileTypeScript.ts'
 import * as TranspileTypeScript2 from '../TranspileTypeScript2/TranspileTypeScript2.ts'
+import * as TranspileTypeScript from '../TranspileTypeScript/TranspileTypeScript.ts'
 import * as TranspileTypeScriptAtPath from '../TranspileTypeScriptAtPath/TranspileTypeScriptAtPath.ts'
 import * as TypeScriptPath from '../TypeScriptPath/TypeScriptPath.ts'
 
