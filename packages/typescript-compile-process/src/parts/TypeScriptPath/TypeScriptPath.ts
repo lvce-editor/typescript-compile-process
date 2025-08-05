@@ -6,6 +6,6 @@ export const get = () => {
   return state.typescriptPath
 }
 
-export const set = (value) => {
+export const set = (value: any) => {
   state.typescriptPath = value
 }
