@@ -1,6 +1,6 @@
 import { join } from 'node:path'
 import { root } from './root.ts'
 
-export const instantiations = 12_000
+export const instantiations = 1000
 
-export const instantiationsPath = join(root, 'packages', 'file-system-process')
+export const instantiationsPath = join(root, 'packages', 'typescript-compile-process')

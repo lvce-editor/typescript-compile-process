@@ -2,7 +2,7 @@ import * as Assert from '../Assert/Assert.ts'
 import * as IpcChild from '../IpcChild/IpcChild.ts'
 import * as IpcChildType from '../IpcChildType/IpcChildType.ts'
 
-export const handleElectronMessagePort = async (messagePort, ipcId) => {
+export const handleElectronMessagePort = async (messagePort: any, ipcId: any) => {
   Assert.object(messagePort)
   // Assert.number(ipcId)
   // TODO use handleIncomingIpc function

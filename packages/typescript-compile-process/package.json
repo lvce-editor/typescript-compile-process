@@ -1,0 +1,60 @@
+{
+  "name": "@lvce-editor/typescript-compile-process",
+  "version": "0.0.0-dev",
+  "description": "TypeScript Compile Process",
+  "keywords": [
+    "Lvce Editor"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lvce-editor/typescript-compile-process.git"
+  },
+  "license": "MIT",
+  "author": "Lvce Editor",
+  "type": "module",
+  "main": "src/typescriptCompileProcessMain.ts",
+  "bin": "bin/typescriptCompileProcess.js",
+  "scripts": {
+    "test": "node --unhandled-rejections=warn --experimental-vm-modules ./node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
+    "test:watch": "node --unhandled-rejections=warn --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch"
+  },
+  "jest": {
+    "injectGlobals": false,
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
+    "transform": {
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "useESM": true
+        }
+      ]
+    },
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 33,
+        "functions": 42,
+        "lines": 57
+      }
+    }
+  },
+  "dependencies": {
+    "@lvce-editor/assert": "^1.4.0",
+    "@lvce-editor/rpc": "^4.13.0",
+    "@lvce-editor/verror": "^1.7.0"
+  },
+  "devDependencies": {
+    "@jest/globals": "^30.0.5",
+    "@types/node": "^24.2.0",
+    "jest": "^30.0.5",
+    "ts-jest": "^29.4.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

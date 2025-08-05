@@ -1,10 +1,7 @@
 {
-  "name": "@lvce-editor/typescript-compile-process",
+  "name": "@lvce-editor/typescript-compile-process-monorepo",
   "version": "0.0.0-dev",
-  "description": "TypeScript Compile Process",
-  "keywords": [
-    "Lvce Editor"
-  ],
+  "description": "TypeScript Compile Process Monorepo",
   "repository": {
     "type": "git",
     "url": "https://github.com/lvce-editor/typescript-compile-process.git"
@@ -12,113 +9,30 @@
   "license": "MIT",
   "author": "Lvce Editor",
   "type": "module",
-  "main": "src/typescriptCompileProcessMain.ts",
-  "bin": "bin/typescriptCompileProcess.js",
   "scripts": {
-    "build": "node scripts/build.js",
+    "build": "node packages/build/src/build.js",
+    "build:watch": "./packages/build/node_modules/.bin/esbuild --format=esm --platform=node --bundle --external:electron --external:trash --external:ws --watch packages/typescript-compile-process/src/fileSystemProcessMain.ts --outfile=packages/typescript-compile-process/dist/index.js",
+    "dev": "node packages/build/src/dev.js",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "test": "node --unhandled-rejections=warn --experimental-vm-modules ./node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
-    "test:watch": "node --unhandled-rejections=warn --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch",
-    "type-check": "tsc"
-  },
-  "xo": {
-    "rules": {
-      "unicorn/filename-case": "off",
-      "indent": "off",
-      "semi": "off",
-      "no-unused-vars": "off",
-      "unicorn/numeric-separators-style": "off",
-      "no-extra-semi": "off",
-      "arrow-body-style": "off",
-      "padded-blocks": "off",
-      "capitalized-comments": "off",
-      "padding-line-between-statements": "off",
-      "arrow-parens": "off",
-      "no-warning-comments": "off",
-      "array-bracket-spacing": "off",
-      "comma-spacing": "off",
-      "unicorn/no-array-callback-reference": "off",
-      "comma-dangle": "off",
-      "operator-linebreak": "off",
-      "no-case-declarations": "off",
-      "no-undef": "off",
-      "object-curly-spacing": "off",
-      "object-shorthand": "off",
-      "complexity": "off",
-      "no-labels": "off",
-      "no-multi-assign": "off",
-      "max-params": "off",
-      "no-bitwise": "off",
-      "unicorn/prefer-math-trunc": "off",
-      "no-await-in-loop": "off",
-      "unicorn/prefer-add-event-listener": "off",
-      "no-unused-expressions": "off",
-      "node/prefer-global/process": "off",
-      "unicorn/prevent-abbreviations": "off",
-      "unicorn/no-process-exit": "off",
-      "quotes": "off",
-      "n/prefer-global/process": [
-        "error",
-        "always"
-      ]
-    },
-    "ignores": [
-      "distmin"
-    ]
+    "postinstall": "lerna bootstrap --ci",
+    "test": "lerna run test",
+    "type-check": "tsc -b"
   },
   "prettier": {
     "semi": false,
     "singleQuote": true,
-    "printWidth": 120
-  },
-  "jest": {
-    "injectGlobals": false,
-    "extensionsToTreatAsEsm": [
-      ".ts"
-    ],
-    "moduleNameMapper": {
-      "^(\\.{1,2}/.*)\\.js$": "$1"
-    },
-    "transform": {
-      "^.+\\.tsx?$": [
-        "ts-jest",
-        {
-          "useESM": true
-        }
-      ]
-    },
-    "collectCoverage": true,
-    "coverageThreshold": {
-      "global": {
-        "branches": 33,
-        "functions": 42,
-        "lines": 57
-      }
-    }
-  },
-  "dependencies": {
-    "@lvce-editor/assert": "^1.4.0",
-    "@lvce-editor/rpc": "^4.13.0",
-    "@lvce-editor/verror": "^1.7.0"
+    "printWidth": 130
   },
   "devDependencies": {
-    "@babel/preset-typescript": "^7.27.1",
-    "@jest/globals": "^30.0.5",
     "@lerna/legacy-package-management": "^8.2.4",
     "@lvce-editor/eslint-config": "^1.56.0",
-    "@rollup/plugin-babel": "^6.0.4",
-    "@types/node": "^20.13.0",
     "eslint": "^9.32.0",
-    "execa": "^9.6.0",
-    "jest": "^30.0.5",
     "lerna": "^8.2.3",
     "prettier": "^3.6.2",
-    "rollup": "^4.46.2",
-    "ts-jest": "^29.4.1",
     "typescript": "^5.9.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   }
 }
