@@ -9,7 +9,7 @@
       "path": "./packages/build"
     },
     {
-      "path": "./packages/file-system-process"
+      "path": "./packages/typescript-compile-process"
     },
     {
       "path": "./packages/memory"
