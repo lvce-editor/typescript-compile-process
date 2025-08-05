@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals'
-import * as TypeScriptPath from '../src/parts/TypeScriptPath/TypeScriptPath.js'
+import * as TypeScriptPath from '../src/parts/TypeScriptPath/TypeScriptPath.ts'
 
 test('get / set', () => {
   TypeScriptPath.set('/test/typescript.js')

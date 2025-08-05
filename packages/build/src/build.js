@@ -57,7 +57,7 @@ await bundleJs()
 
 const version = await getVersion()
 
-const packageJson = await readJson(join(root, 'packages', 'file-system-process', 'package.json'))
+const packageJson = await readJson(join(root, 'packages', 'typescript-compile-process', 'package.json'))
 
 delete packageJson.scripts
 delete packageJson.devDependencies
@@ -79,7 +79,7 @@ await writeJson(join(dist, 'package.json'), packageJson)
 
 await mkdir(join(dist, 'bin'))
 await writeFile(
-  join(dist, 'bin', 'fileSystemProcess.js'),
+  join(dist, 'bin', 'typescriptCompileProcess.js'),
   `#!/usr/bin/env node
 
 import '../dist/index.js'

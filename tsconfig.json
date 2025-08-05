@@ -1,24 +1,21 @@
 {
-  "compilerOptions": {
-    "lib": ["esnext"],
-    "target": "esnext",
-    "checkJs": true,
-    "module": "NodeNext",
-    "types": ["node"],
-    "moduleResolution": "nodenext",
-    "isolatedModules": true,
-    "noImplicitAny": false,
-    "skipLibCheck": true,
-    "rootDir": ".",
-    "noEmit": true,
-    "allowSyntheticDefaultImports": true,
-    "assumeChangesOnlyAffectDirectDependencies": true,
-    "strict": true,
-    "useUnknownInCatchVariables": false,
-    "composite": true,
-    "allowImportingTsExtensions": true,
-    "forceConsistentCasingInFileNames": true,
-    "noUnusedLocals": true
-  },
-  "include": ["src", "test"]
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./packages/e2e"
+    },
+    {
+      "path": "./packages/build"
+    },
+    {
+      "path": "./packages/file-system-process"
+    },
+    {
+      "path": "./packages/memory"
+    },
+    {
+      "path": "./packages/server"
+    }
+  ]
 }
