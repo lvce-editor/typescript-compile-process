@@ -7,7 +7,7 @@ export const handleElectronMessagePort = async (messagePort: any, ipcId: any) =>
   // Assert.number(ipcId)
   // TODO use handleIncomingIpc function
   await IpcChild.listen({
-    method: IpcChildType.ElectronMessagePort,
     messagePort,
+    method: IpcChildType.ElectronMessagePort,
   })
 }

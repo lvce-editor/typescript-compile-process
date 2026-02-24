@@ -17,7 +17,7 @@ test('loadTypeScript', async () => {
       default: typescript,
     }
   })
-  const typescriptPath = '/test/typscript.js'
+  const typescriptPath = '/test/typescript.js'
   expect(await LoadTypeScript.loadTypeScript(typescriptPath)).toBe(typescript)
 })
 
@@ -26,7 +26,7 @@ test('loadTypeScript - error - missing default export', async () => {
   jest.spyOn(ImportScript, 'importScript').mockImplementation(() => {
     return {}
   })
-  const typescriptPath = '/test/typscript.js'
+  const typescriptPath = '/test/typescript.js'
   await expect(LoadTypeScript.loadTypeScript(typescriptPath)).rejects.toThrow(
     new Error('Failed to load typescript: missing default export'),
   )
@@ -37,7 +37,7 @@ test('loadTypeScript - error', async () => {
   jest.spyOn(ImportScript, 'importScript').mockImplementation(() => {
     throw new TypeError('x is not a function')
   })
-  const typescriptPath = '/test/typscript.js'
+  const typescriptPath = '/test/typescript.js'
   await expect(LoadTypeScript.loadTypeScript(typescriptPath)).rejects.toThrow(
     new Error('Failed to load typescript: TypeError: x is not a function'),
   )
@@ -55,7 +55,7 @@ test('loadTypeScript - error - not found', async () => {
   jest.spyOn(ImportScript, 'importScript').mockImplementation(() => {
     throw new ModuleNotFoundError()
   })
-  const typescriptPath = '/test/typscript.js'
+  const typescriptPath = '/test/typescript.js'
   await expect(LoadTypeScript.loadTypeScript(typescriptPath)).rejects.toThrow(
     new Error('Failed to load typescript: Typescript not found'),
   )
