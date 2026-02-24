@@ -13,7 +13,7 @@ export const loadTypeScript = async (typescriptPath: string) => {
     return actual
   } catch (error) {
     if (isModuleNotFoundError(error)) {
-      throw new TypeScriptNotFoundError()
+      throw new TypeScriptNotFoundError(typescriptPath)
     }
     throw new VError(error, `Failed to load typescript`)
   }
