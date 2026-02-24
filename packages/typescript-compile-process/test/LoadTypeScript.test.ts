@@ -57,6 +57,6 @@ test('loadTypeScript - error - not found', async () => {
   })
   const typescriptPath = '/test/typescript.js'
   await expect(LoadTypeScript.loadTypeScript(typescriptPath)).rejects.toThrow(
-    new Error('Failed to load typescript: Typescript not found'),
+    new Error('Failed to load typescript: Typescript not found at "/test/typescript.js"'),
   )
 })
