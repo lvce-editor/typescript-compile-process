@@ -1,14 +1,13 @@
 import { existsSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
-import { fileURLToPath, pathToFileURL } from 'node:url'
+import { fileURLToPath } from 'node:url'
 
 const extensionApiRelativePath = join('packages', 'extension-api', 'src', 'index.ts')
 const extensionApiEnvName = 'LVCE_EDITOR_EXTENSION_API_PATH'
 const maxParentDepth = 6
 
 const getRemoteUrl = (path: string): string => {
-  const url = pathToFileURL(path).toString().slice('file:///'.length)
-  return `/remote/${url}`
+  return `/remote${path}`
 }
 
 const getParentDirectories = (path: string): readonly string[] => {
