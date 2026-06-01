@@ -28,7 +28,13 @@ const getParentDirectories = (path: string): readonly string[] => {
 const getSiblingExtensionApiPaths = (root: string): readonly string[] => {
   try {
     const entries = readdirSync(root, { withFileTypes: true })
-    return entries.filter((entry) => entry.isDirectory()).map((entry) => join(root, entry.name, extensionApiRelativePath))
+    const paths: string[] = []
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        paths.push(join(root, entry.name, extensionApiRelativePath))
+      }
+    }
+    return paths
   } catch {
     return []
   }
@@ -42,7 +48,13 @@ export const getCandidateExtensionApiPaths = (cwd = process.cwd(), moduleUrl = i
     ...roots.map((root) => join(root, extensionApiRelativePath)),
     ...roots.flatMap(getSiblingExtensionApiPaths),
   ]
-  return [...new Set(candidates.filter(Boolean))]
+  const definedCandidates: string[] = []
+  for (const candidate of candidates) {
+    if (candidate) {
+      definedCandidates.push(candidate)
+    }
+  }
+  return [...new Set(definedCandidates)]
 }
 
 export const getExtensionApiPath = (candidates = getCandidateExtensionApiPaths()): string => {
@@ -59,7 +71,7 @@ export const rewriteLvceEditorApiImports = (code: string, extensionApiPath = get
     return code
   }
   const extensionApiUrl = getRemoteUrl(extensionApiPath)
-  return code.replaceAll(/(['"])@lvce-editor\/api\1/g, (match, quote: string) => {
+  return code.replaceAll(/(['"])@lvce-editor\/api\1/g, (_match: string, quote: string) => {
     return `${quote}${extensionApiUrl}${quote}`
   })
 }
