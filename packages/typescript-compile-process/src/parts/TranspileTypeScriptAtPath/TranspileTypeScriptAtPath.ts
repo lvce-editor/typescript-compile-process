@@ -6,7 +6,7 @@ export const transpileTypeScriptAtPath = async (inPath: string, outPath: string)
   try {
     const content = await readFile(inPath, 'utf8')
     const newContent = await TranspileTypeScript.transpileTypeScript(content)
-    await writeFile(outPath, newContent)
+    await writeFile(outPath, newContent.outputText)
   } catch (error) {
     throw new VError(error, `Failed to transpile typescript`)
   }
