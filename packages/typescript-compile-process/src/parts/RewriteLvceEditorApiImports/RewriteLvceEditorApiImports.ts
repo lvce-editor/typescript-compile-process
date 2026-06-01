@@ -42,7 +42,7 @@ export const getCandidateExtensionApiPaths = (cwd = process.cwd(), moduleUrl = i
     ...roots.map((root) => join(root, extensionApiRelativePath)),
     ...roots.flatMap(getSiblingExtensionApiPaths),
   ]
-  return [...new Set(candidates.filter((candidate): candidate is string => Boolean(candidate)))]
+  return [...new Set(candidates.filter(Boolean))]
 }
 
 export const getExtensionApiPath = (candidates = getCandidateExtensionApiPaths()): string => {
@@ -59,7 +59,7 @@ export const rewriteLvceEditorApiImports = (code: string, extensionApiPath = get
     return code
   }
   const extensionApiUrl = getRemoteUrl(extensionApiPath)
-  return code.replace(/(['"])@lvce-editor\/api\1/g, (match, quote: string) => {
+  return code.replaceAll(/(['"])@lvce-editor\/api\1/g, (match, quote: string) => {
     return `${quote}${extensionApiUrl}${quote}`
   })
 }

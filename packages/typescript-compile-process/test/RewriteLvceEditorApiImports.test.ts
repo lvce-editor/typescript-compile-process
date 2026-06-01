@@ -1,7 +1,7 @@
+import { expect, test } from '@jest/globals'
 import { mkdir, mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { expect, test } from '@jest/globals'
 import * as RewriteLvceEditorApiImports from '../src/parts/RewriteLvceEditorApiImports/RewriteLvceEditorApiImports.ts'
 
 test('rewriteLvceEditorApiImports - no extension api path', () => {
