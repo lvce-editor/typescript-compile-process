@@ -2,7 +2,7 @@ import { existsSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const extensionApiRelativePath = join('packages', 'extension-api', 'src', 'index.ts')
+const extensionApiRelativePath = join('.tmp', 'dist', 'dist', 'extension-api', 'index.js')
 const extensionApiEnvName = 'LVCE_EDITOR_EXTENSION_API_PATH'
 const maxParentDepth = 6
 

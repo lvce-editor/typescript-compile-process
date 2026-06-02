@@ -11,8 +11,8 @@ test('rewriteLvceEditorApiImports - no extension api path', () => {
 
 test('rewriteLvceEditorApiImports', async () => {
   const root = await mkdtemp(join(tmpdir(), 'typescript-compile-process-'))
-  const extensionApiPath = join(root, 'packages', 'extension-api', 'src', 'index.ts')
-  await mkdir(join(root, 'packages', 'extension-api', 'src'), { recursive: true })
+  const extensionApiPath = join(root, '.tmp', 'dist', 'dist', 'extension-api', 'index.js')
+  await mkdir(join(root, '.tmp', 'dist', 'dist', 'extension-api'), { recursive: true })
   await writeFile(extensionApiPath, 'export {}')
 
   const code = `import { activate } from '@lvce-editor/api'`
@@ -23,8 +23,8 @@ test('rewriteLvceEditorApiImports', async () => {
 
 test('getExtensionApiPath - direct parent', async () => {
   const root = await mkdtemp(join(tmpdir(), 'typescript-compile-process-'))
-  const extensionApiPath = join(root, 'packages', 'extension-api', 'src', 'index.ts')
-  await mkdir(join(root, 'packages', 'extension-api', 'src'), { recursive: true })
+  const extensionApiPath = join(root, '.tmp', 'dist', 'dist', 'extension-api', 'index.js')
+  await mkdir(join(root, '.tmp', 'dist', 'dist', 'extension-api'), { recursive: true })
   await writeFile(extensionApiPath, 'export {}')
 
   const candidates = RewriteLvceEditorApiImports.getCandidateExtensionApiPaths(join(root, 'packages', 'server'))
@@ -35,9 +35,9 @@ test('getExtensionApiPath - sibling project', async () => {
   const parent = await mkdtemp(join(tmpdir(), 'typescript-compile-process-'))
   const serverRoot = join(parent, 'lvce-editor')
   const extensionHostWorkerRoot = join(parent, 'extension-host-worker')
-  const extensionApiPath = join(extensionHostWorkerRoot, 'packages', 'extension-api', 'src', 'index.ts')
+  const extensionApiPath = join(extensionHostWorkerRoot, '.tmp', 'dist', 'dist', 'extension-api', 'index.js')
   await mkdir(serverRoot, { recursive: true })
-  await mkdir(join(extensionHostWorkerRoot, 'packages', 'extension-api', 'src'), { recursive: true })
+  await mkdir(join(extensionHostWorkerRoot, '.tmp', 'dist', 'dist', 'extension-api'), { recursive: true })
   await writeFile(extensionApiPath, 'export {}')
 
   const candidates = RewriteLvceEditorApiImports.getCandidateExtensionApiPaths(serverRoot)
