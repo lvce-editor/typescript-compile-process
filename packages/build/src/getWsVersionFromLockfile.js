@@ -8,12 +8,14 @@ const readJson = async (path) => {
 }
 
 export const getWsVersionFromLockfile = async () => {
-  const lockfilePath = join(root, 'packages', 'typescript-compile-process', 'package-lock.json')
+  const lockfilePath = join(root, 'package-lock.json')
   const lockfile = await readJson(lockfilePath)
 
   // ws is always installed as a dependency of @lvce-editor/rpc
-  if (lockfile.packages && lockfile.packages['node_modules/ws'] && lockfile.packages['node_modules/ws'].version) {
-    return `^${lockfile.packages['node_modules/ws'].version}`
+  const wsPackage =
+    lockfile.packages?.['packages/typescript-compile-process/node_modules/ws'] || lockfile.packages?.['node_modules/ws']
+  if (wsPackage?.version) {
+    return `^${wsPackage.version}`
   }
 
   throw new Error('Could not find ws version in package-lock.json. Make sure @lvce-editor/rpc is installed.')
