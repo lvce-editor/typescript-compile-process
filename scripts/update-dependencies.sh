@@ -16,14 +16,7 @@ fi
 
 function updateDependencies {
   echo "updating dependencies..."
-  OUTPUT=`ncu -u -x @types/node -x jest -x @jest/globals -x lerna -x typescript`
-  SUB='All dependencies match the latest package versions'
-  if [[ "$OUTPUT" == *"$SUB"* ]]; then
-    echo "$OUTPUT"
-  else
-    rm -rf node_modules package-lock.json dist
-    npm install
-  fi
+  ncu -u -x @types/node -x jest -x @jest/globals -x typescript
 }
 
                                                        updateDependencies             &&
@@ -32,6 +25,8 @@ cd packages/e2e                                     && updateDependencies && cd 
 cd packages/memory                                  && updateDependencies && cd ../.. &&
 cd packages/server                                  && updateDependencies && cd ../.. &&
 cd packages/typescript-compile-process              && updateDependencies && cd ../.. &&
+
+npm install
 
 echo "Great Success!"
 
