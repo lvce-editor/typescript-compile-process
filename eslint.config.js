@@ -1,6 +1,7 @@
 import * as config from '@lvce-editor/eslint-config'
+import { defineConfig } from 'eslint/config'
 
-export default [
+export default defineConfig([
   ...config.default,
   ...config.recommendedNode,
   {
@@ -13,4 +14,4 @@ export default [
       'jest/no-restricted-jest-methods': 'off',
     },
   },
-]
+])
