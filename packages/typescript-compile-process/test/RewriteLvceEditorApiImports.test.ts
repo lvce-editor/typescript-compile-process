@@ -1,3 +1,4 @@
+// cspell:ignore worktrees
 import { expect, test } from '@jest/globals'
 import { mkdir, mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
@@ -42,4 +43,17 @@ test('getExtensionApiPath - sibling project', async () => {
 
   const candidates = RewriteLvceEditorApiImports.getCandidateExtensionApiPaths(serverRoot)
   expect(RewriteLvceEditorApiImports.getExtensionApiPath(candidates)).toBe(extensionApiPath)
+})
+
+test('getExtensionApiPath - sibling project worktree', async () => {
+  const parent = await mkdtemp(join(tmpdir(), 'typescript-compile-process-'))
+  const serverRoot = join(parent, 'source-control-view.worktrees', 'direct-source-control-e2e')
+  const extensionHostWorkerRoot = join(parent, 'extension-host-worker.worktrees', 'extension-api')
+  const extensionApiPath = join(extensionHostWorkerRoot, '.tmp', 'dist', 'dist', 'extension-api', 'index.js')
+  await mkdir(serverRoot, { recursive: true })
+  await mkdir(join(extensionHostWorkerRoot, '.tmp', 'dist', 'dist', 'extension-api'), { recursive: true })
+  await writeFile(extensionApiPath, 'export {}')
+
+  const candidates = RewriteLvceEditorApiImports.getCandidateExtensionApiPaths(serverRoot)
+  expect(candidates).toContain(extensionApiPath)
 })
