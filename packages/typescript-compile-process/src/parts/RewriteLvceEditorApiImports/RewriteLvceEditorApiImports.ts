@@ -4,6 +4,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const extensionApiRelativePath = join('.tmp', 'dist', 'dist', 'extension-api', 'index.js')
+const bundledExtensionApiName = 'extensionApi.js'
 const extensionApiEnvName = 'LVCE_EDITOR_EXTENSION_API_PATH'
 const extensionHostWorkerWorktreesName = 'extension-host-worker.worktrees'
 const maxParentDepth = 6
@@ -68,6 +69,7 @@ export const getCandidateExtensionApiPaths = (cwd = process.cwd(), moduleUrl = i
   const roots = [...getParentDirectories(cwd), ...getParentDirectories(modulePath)]
   const candidates = [
     process.env[extensionApiEnvName],
+    join(modulePath, bundledExtensionApiName),
     ...roots.map((root) => join(root, extensionApiRelativePath)),
     ...roots.flatMap(getSiblingExtensionApiPaths),
     ...roots.flatMap(getSiblingWorktreeExtensionApiPaths),

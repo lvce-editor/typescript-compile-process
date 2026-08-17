@@ -2,6 +2,7 @@ import { execa } from 'execa'
 import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { bundleJs } from './bundleJs.js'
+import { bundleExtensionApi } from './bundleExtensionApi.js'
 import { root } from './root.js'
 
 const dist = join(root, '.tmp', 'dist')
@@ -52,7 +53,7 @@ const getVersion = async () => {
 await rm(dist, { recursive: true, force: true })
 await mkdir(dist, { recursive: true })
 
-await bundleJs()
+await Promise.all([bundleJs(), bundleExtensionApi()])
 
 const version = await getVersion()
 
