@@ -1,7 +1,7 @@
 // cspell:ignore worktrees
 import { existsSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const extensionApiRelativePath = join('.tmp', 'dist', 'dist', 'extension-api', 'index.js')
 const bundledExtensionApiName = 'extensionApi.js'
@@ -10,7 +10,7 @@ const extensionHostWorkerWorktreesName = 'extension-host-worker.worktrees'
 const maxParentDepth = 6
 
 const getRemoteUrl = (path: string): string => {
-  return `/remote${path}`
+  return `/remote/${pathToFileURL(path).toString().slice(8)}`
 }
 
 const getParentDirectories = (path: string): readonly string[] => {
