@@ -1,9 +1,11 @@
+// cspell:ignore worktrees
 import { existsSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const extensionApiRelativePath = join('.tmp', 'dist', 'dist', 'extension-api', 'index.js')
 const extensionApiEnvName = 'LVCE_EDITOR_EXTENSION_API_PATH'
+const extensionHostWorkerWorktreesName = 'extension-host-worker.worktrees'
 const maxParentDepth = 6
 
 const getRemoteUrl = (path: string): string => {
@@ -39,6 +41,28 @@ const getSiblingExtensionApiPaths = (root: string): readonly string[] => {
   }
 }
 
+const getSiblingWorktreeExtensionApiPaths = (root: string): readonly string[] => {
+  try {
+    const entries = readdirSync(root, { withFileTypes: true })
+    const paths: string[] = []
+    for (const entry of entries) {
+      if (!entry.isDirectory() || entry.name !== extensionHostWorkerWorktreesName) {
+        continue
+      }
+      const worktreesRoot = join(root, entry.name)
+      const worktrees = readdirSync(worktreesRoot, { withFileTypes: true })
+      for (const worktree of worktrees) {
+        if (worktree.isDirectory()) {
+          paths.push(join(worktreesRoot, worktree.name, extensionApiRelativePath))
+        }
+      }
+    }
+    return paths
+  } catch {
+    return []
+  }
+}
+
 export const getCandidateExtensionApiPaths = (cwd = process.cwd(), moduleUrl = import.meta.url): readonly string[] => {
   const modulePath = dirname(fileURLToPath(moduleUrl))
   const roots = [...getParentDirectories(cwd), ...getParentDirectories(modulePath)]
@@ -46,6 +70,7 @@ export const getCandidateExtensionApiPaths = (cwd = process.cwd(), moduleUrl = i
     process.env[extensionApiEnvName],
     ...roots.map((root) => join(root, extensionApiRelativePath)),
     ...roots.flatMap(getSiblingExtensionApiPaths),
+    ...roots.flatMap(getSiblingWorktreeExtensionApiPaths),
   ]
   const definedCandidates: string[] = []
   for (const candidate of candidates) {
