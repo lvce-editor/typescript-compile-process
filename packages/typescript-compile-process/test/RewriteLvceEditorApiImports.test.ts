@@ -19,7 +19,7 @@ test('rewriteLvceEditorApiImports', async () => {
 
   const code = `import { activate } from '@lvce-editor/api'`
   expect(RewriteLvceEditorApiImports.rewriteLvceEditorApiImports(code, extensionApiPath)).toBe(
-    `import { activate } from '/remote${extensionApiPath}'`,
+    `import { activate } from '/remote/${pathToFileURL(extensionApiPath).toString().slice(8)}'`,
   )
 })
 
