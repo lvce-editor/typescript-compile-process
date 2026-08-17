@@ -2,7 +2,8 @@
 import { expect, test } from '@jest/globals'
 import { mkdir, mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
+import { pathToFileURL } from 'node:url'
 import * as RewriteLvceEditorApiImports from '../src/parts/RewriteLvceEditorApiImports/RewriteLvceEditorApiImports.ts'
 
 test('rewriteLvceEditorApiImports - no extension api path', () => {
@@ -29,6 +30,17 @@ test('getExtensionApiPath - direct parent', async () => {
   await writeFile(extensionApiPath, 'export {}')
 
   const candidates = RewriteLvceEditorApiImports.getCandidateExtensionApiPaths(join(root, 'packages', 'server'))
+  expect(RewriteLvceEditorApiImports.getExtensionApiPath(candidates)).toBe(extensionApiPath)
+})
+
+test('getExtensionApiPath - bundled extension API', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'typescript-compile-process-'))
+  const modulePath = join(root, 'dist', 'index.js')
+  const extensionApiPath = join(dirname(modulePath), 'extensionApi.js')
+  await mkdir(dirname(modulePath), { recursive: true })
+  await writeFile(extensionApiPath, 'export {}')
+
+  const candidates = RewriteLvceEditorApiImports.getCandidateExtensionApiPaths(join(root, 'server'), pathToFileURL(modulePath).toString())
   expect(RewriteLvceEditorApiImports.getExtensionApiPath(candidates)).toBe(extensionApiPath)
 })
 
